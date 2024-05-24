@@ -1,0 +1,50 @@
+Architects of Annihilation:
+- Plague Inc.
+	- not necessarily plague - maybe other disasters
+	- map - maybe shinyapp
+	- human population simulation
+		- countries have stats
+			- food production
+			- capital
+			- production
+			- labour
+				- capital + labour increase food prod and capital
+				- food prod + labour -> food
+				- food + labour + capital -> labour
+			- buildings with tags providing these stats
+			- disasters affect buildings with certain tags
+			- culture means focus and bonus towards certain buildings
+	- goal of game:
+		- minimise labour and capital
+	- disasters
+		- have tags
+			- different building affected by different disaster tags
+			- can affect labour directly
+	- R is pain on nix -> we don't do this
+- Nuclear Engineer building nuke
+	- text based
+- Engineer building border wall
+	- text based
+	- soviet era?
+	- different technologies for killing people and support these killers
+		- maintenance costs
+		- technologies
+		- examples
+			- guard tower
+			- automatic turret
+			- lights
+			- AT traps
+			- wall
+			- moat
+			- mine field
+	- changing demands from gov
+	- increasing numbers of people to annihilate
+		- different types -> on foot, ladder, car
+	- ressource constraints
+	- papers please...
+	- enemy gov offering reward for backdoors
+	- managing workers with stats
+		- trustworthyness
+		- labor cost
+		- work speed
+		- morale
