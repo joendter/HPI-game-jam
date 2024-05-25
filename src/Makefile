@@ -14,7 +14,9 @@ SOURCES = $(wildcard *.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Default target to build the executable
-all: $(EXEC)
+all: clean unclean 
+
+unclean: $(EXEC)
 
 # Rule to link the object files into the executable
 $(EXEC): $(OBJECTS)
