@@ -48,3 +48,15 @@ Architects of Annihilation:
 		- labor cost
 		- work speed
 		- morale
+
+
+# Quantum chess
+- every piece has a 50% chance to actually do what it was told to
+- this creates superpositions
+- these collapse if 2 pieces try to be on the same square
+	- attacker collapses first
+	- if attacker is on the attacked square after collapse the defender collapses
+	- if both pieces are of the same color and both collapsed to the attacked square the attacker stops on their previous substep (they might not move at all)
+	- bishop/rook/queen try to move to every square on the way to their target square first, they might not make it to the target square
+	- castling is not possible
+	- 
