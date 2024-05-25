@@ -61,20 +61,6 @@ class Fraction {
         return *this;
     }
 
-    // Overloaded -= operator for subtraction
-    Fraction &operator-=(const Fraction &other) {
-        operator+=(Fraction(0) - other);
-        return *this;
-    }
-
-    // Overloaded += operator for addition
-    Fraction &operator+=(const Fraction &other) {
-        numerator_ =
-            numerator_ * other.denominator_ + other.numerator_ * denominator_;
-        denominator_ = denominator_ * other.numerator_;
-        reduce();
-        return *this;
-    }
 
     // Comparison operators
     bool operator==(const Fraction &other) const {

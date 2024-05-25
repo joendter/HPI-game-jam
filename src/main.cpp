@@ -19,9 +19,15 @@ int main() {
     game.players[1].pieces.insert(piece);
     game.print();
     game.move(Coordinate(1,1), Coordinate(1,2));
+    std::cout << "number of supers in outer "<<  (*game.players[0].pieces.begin())->superpositions.size() << std::endl;
     game.print();
     game.move(Coordinate(2,3), Coordinate(3,3));
     game.print();
+    game.move(Coordinate(1,2),Coordinate(2,3));
+    game.print();
+    game.move(Coordinate(3,3),Coordinate(1,1));
+    game.print();
+
 
 
 

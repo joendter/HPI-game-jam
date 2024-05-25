@@ -85,7 +85,9 @@ class Piece {
         }
 
         std::uniform_int_distribution<> dis(1, smallest_common_denominator);
+        std::cout << "lcm: " << smallest_common_denominator << std::endl;
         unsigned randomNumber = dis(gen);
+        std::cout << "generated value" << randomNumber << std::endl;
         unsigned accumulator = 0;
         bool found = false;
         Coordinate collapsedPosition;
@@ -94,7 +96,7 @@ class Piece {
             accumulator += (pair.second->probability *
                             Fraction(smallest_common_denominator))
                                .getNumerator();
-            if (accumulator <= randomNumber && !found) {
+            if ((accumulator >= randomNumber) && (!found)) {
                 collapsedPosition = pair.first;
                 collapsedPiecetype = pair.second->type;
                 found = true;
@@ -109,14 +111,17 @@ class Piece {
     void move(Coordinate origin, Coordinate destination, Fraction probability) {
         auto it = onLocation(origin);
         Fraction yoinkedProbability = it->probability * probability;
-        it->probability -= yoinkedProbability;
+        it->probability = it->probability - yoinkedProbability;
         auto other = onLocation(destination);
         if (other != nullptr) {
-            other->probability += yoinkedProbability;
+            other->probability = other->probability + yoinkedProbability;
+        std::cout << "superpositions after move" << superpositions.size() << std::endl;
             return;
         }
         superpositions[destination] =
             new Superposition(it->type, yoinkedProbability);
+        std::cout << "superpositions after move" << superpositions.size() << std::endl;
+        std::cout << "superposition at origin: " << superpositions.find(origin)->second->probability << std::endl;
     }
 
     ~Piece() {
@@ -129,7 +134,7 @@ class Piece {
     std::string stringAtPos(Coordinate position) const {
         auto it = superpositions.find(position)->second;
         return std::string() + (char)(it->type) +
-               std::to_string((float)it->probability)[2];
+               std::to_string(((float)it->probability)*10).substr(0,2);
     }
 };
 

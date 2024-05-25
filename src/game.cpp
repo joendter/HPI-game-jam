@@ -5,6 +5,7 @@
 #include "player.cpp"
 #include <iostream>
 #include <random>
+#include "dirtyrandom.cpp"
 
 class Game {
   public:
@@ -12,6 +13,7 @@ class Game {
     Player players[2];
     unsigned int turn;
     Fraction probability = Fraction(1, 2);
+
 
     Piece *onLocation(Coordinate location) const {
         auto it = players[0].findPiece(location);
@@ -26,7 +28,7 @@ class Game {
             for (int x = 0; x < board.x; x++) {
                 auto piece = onLocation(Coordinate(x, y));
                 if (piece == nullptr) {
-                    std::cout << "|  |";
+                    std::cout << "|   |";
                 }
                 else {
                 std::cout << "|" << piece->stringAtPos(Coordinate(x, y)) << "|";
@@ -81,8 +83,7 @@ class Game {
             return;
         }
 
-        std::random_device rd; // Obtain a random seed from the operating system
-        std::mt19937 gen(rd());
+        std::mt19937 gen(dirtyrandom());
 
         // collapse the attacker
         piece->collapse(gen);
