@@ -1,22 +1,4 @@
-#ifndef PIECE_CPP
-#define PIECE_CPP
-#include "color.h"
-#include "coordinate.cpp"
-#include "fraction.cpp"
-#include <map>
-#include <numeric>
-#include <random>
-#include <set>
-#include <stdexcept>
-
-enum Piecetype {
-    PAWN = 'p',
-    ROOK = 'r',
-    BISHOP = 'b',
-    KNIGHT = 'n',
-    QUEEN = 'q',
-    KING = 'k'
-};
+#include "piece.h"
 
 bool validPieceMove(enum Piecetype piecetype, Coordinate diff) {
     if (piecetype == PAWN) {
@@ -41,20 +23,11 @@ bool validPieceMove(enum Piecetype piecetype, Coordinate diff) {
     }
 }
 
-struct Superposition {
-    enum Piecetype type;
-    Fraction probability;
-
-    Superposition(enum Piecetype type, Fraction probability)
+Superposition::Superposition(enum Piecetype type, Fraction probability)
         : type(type), probability(probability) {}
-};
 
-class Piece {
-  public:
-    enum Color color;
-    std::map<Coordinate, Superposition *> superpositions;
 
-    Superposition *onLocation(Coordinate location) const {
+    Superposition *Piece::onLocation(Coordinate location) const {
         auto it = superpositions.find(location);
         if (it == superpositions.end()) {
             return nullptr;
@@ -62,21 +35,21 @@ class Piece {
         return (it->second);
     }
 
-    Fraction probabilityOnLocation(Coordinate location) const {
+    Fraction Piece::probabilityOnLocation(Coordinate location) const {
         auto it = onLocation(location);
         if (it == nullptr)
             return Fraction(0);
         return (it->probability);
     }
 
-    bool validMove(Coordinate origin, Coordinate destination) const {
+    bool Piece::validMove(Coordinate origin, Coordinate destination) const {
         auto it = onLocation(origin);
         if (it == nullptr)
             return false;
         return validPieceMove(it->type, destination - origin);
     }
 
-    template <typename Generator> void collapse(Generator gen) {
+void Piece::collapse(std::mt19937 gen) {
         unsigned smallest_common_denominator = 1;
         for (auto pair : superpositions) {
             smallest_common_denominator =
@@ -108,7 +81,7 @@ class Piece {
             new Superposition(collapsedPiecetype, Fraction(1));
     }
 
-    void move(Coordinate origin, Coordinate destination, Fraction probability) {
+    void Piece::move(Coordinate origin, Coordinate destination, Fraction probability) {
         auto it = onLocation(origin);
         Fraction yoinkedProbability = it->probability * probability;
         it->probability = it->probability - yoinkedProbability;
@@ -124,18 +97,16 @@ class Piece {
         std::cout << "superposition at origin: " << superpositions.find(origin)->second->probability << std::endl;
     }
 
-    ~Piece() {
+Piece::~Piece() {
         for (auto i : superpositions) {
             delete i.second;
         }
     }
 
     // assume there exists a superposition at position
-    std::string stringAtPos(Coordinate position) const {
+    std::string Piece::stringAtPos(Coordinate position) const {
         auto it = superpositions.find(position)->second;
         return std::string() + (char)(it->type) +
                std::to_string(((float)it->probability)*10).substr(0,2);
     }
-};
 
-#endif

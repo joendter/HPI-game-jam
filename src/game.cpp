@@ -1,28 +1,15 @@
-#ifndef GAME_CPP
-#define GAME_CPP
-#include "coordinate.cpp"
-#include "fraction.cpp"
-#include "player.cpp"
-#include <iostream>
-#include <random>
-#include "dirtyrandom.cpp"
-
-class Game {
-  public:
-    Coordinate board;
-    Player players[2];
-    unsigned int turn;
-    Fraction probability = Fraction(1, 2);
+#include "game.h"
 
 
-    Piece *onLocation(Coordinate location) const {
+
+    Piece *Game::onLocation(Coordinate location) const {
         auto it = players[0].findPiece(location);
         if (it == nullptr)
             it = players[1].findPiece(location);
         return it;
     }
 
-    void print() const {
+    void Game::print() const {
         std::cout << turn << std::endl;
         for (int y = 0; y < board.y; y++) {
             for (int x = 0; x < board.x; x++) {
@@ -38,7 +25,7 @@ class Game {
         }
     }
 
-    bool validMove(Coordinate origin, Coordinate destination) const {
+    bool Game::validMove(Coordinate origin, Coordinate destination) const {
 
         // check if coords are out of bound
         if (!(origin <= board && destination <= board)) {
@@ -58,7 +45,7 @@ class Game {
 
         return true;
     }
-    void move(Coordinate origin, Coordinate destination) {
+    void Game::move(Coordinate origin, Coordinate destination) {
         // check if move is valid
         if (!validMove(origin, destination)) {
             return;
@@ -110,5 +97,3 @@ class Game {
             return;
         }
     }
-};
-#endif

@@ -1,6 +1,6 @@
-
 #include <fstream>
 #include <cstdint>
+#include <iostream>
 
 int dirtyrandom() {
     // Open /dev/urandom and create input stream iterator
