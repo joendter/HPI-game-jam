@@ -59,4 +59,4 @@ Architects of Annihilation:
 	- if both pieces are of the same color and both collapsed to the attacked square the attacker stops on their previous substep (they might not move at all)
 	- bishop/rook/queen try to move to every square on the way to their target square first, they might not make it to the target square
 	- castling is not possible
-	- 
+	- pawns are borked
