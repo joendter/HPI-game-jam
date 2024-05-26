@@ -1,8 +1,13 @@
 #include "repl.h"
 void repl(Game game){
     std::string input;
+    unsigned turn = game.turn;
     while (1){
         game.print();
+        if (turn == game.turn){
+            std::cout << "nothing moved" << std::endl;
+        }
+        turn = game.turn;
         std::getline(std::cin, input);
         if (!checkInput(input)){
             std::cout << "invalid input" << std::endl;

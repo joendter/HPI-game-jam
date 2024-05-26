@@ -1,6 +1,6 @@
 #ifndef DEBUGPRINT_H
 #define DEBUGPRINT_H
-#define DEBUG true
+#define DEBUG false
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -18,7 +18,6 @@ class NullStream : public std::ostream {
     }
 };
 
-#define DEBUGOUT NullStream()
-
+#define DEBUGOUT Nullstream() 
 #endif
 #endif

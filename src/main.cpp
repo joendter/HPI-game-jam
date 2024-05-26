@@ -3,18 +3,9 @@
 int main() {
     Game game;
     game = Game("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-
-    game.print();
-    game.move(Coordinate(1, 1), Coordinate(1, 2));
-    game.print();
-    game.move(Coordinate(2, 3), Coordinate(3, 3));
-    game.print();
-    game.move(Coordinate(1, 2), Coordinate(2, 3));
-    game.print();
-    game.move(Coordinate(3, 3), Coordinate(1, 1));
-    game.print();
-    
-    repl(game);
+    std::cout << "first char of each square is the piece, second one is the probability in hex in 1/16ths" <<std::endl;
+    std::cout << "move pieces by entering origin and destination square, like this: `d2d3` or `b1c3`" << std::endl;
+   repl(game);
 
     return 0;
 }

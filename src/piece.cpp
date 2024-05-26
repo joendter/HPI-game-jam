@@ -61,9 +61,9 @@ void Piece::collapse(std::mt19937 gen) {
     }
 
     std::uniform_int_distribution<> dis(1, smallest_common_denominator);
-    DEBUGOUT << "lcm: " << smallest_common_denominator << std::endl;
+    //DEBUGOUT << "lcm: " << smallest_common_denominator << std::endl;
     unsigned randomNumber = dis(gen);
-    DEBUGOUT << "generated value" << randomNumber << std::endl;
+    //DEBUGOUT << "generated value" << randomNumber << std::endl;
     unsigned accumulator = 0;
     bool found = false;
     Coordinate collapsedPosition;
@@ -92,8 +92,7 @@ void Piece::move(Coordinate origin, Coordinate destination,
     auto other = onLocation(destination);
     if (other != nullptr) {
         other->probability = other->probability + yoinkedProbability;
-        DEBUGOUT << "superpositions after move" << superpositions.size()
-                 << std::endl;
+        //DEBUGOUT << "superpositions after move" << superpositions.size()<< std::endl;
         return;
     }
     enum Piecetype newSuperType = it->type;
@@ -102,10 +101,8 @@ void Piece::move(Coordinate origin, Coordinate destination,
     }
     superpositions[destination] =
         new Superposition(newSuperType, yoinkedProbability);
-    DEBUGOUT << "superpositions after move" << superpositions.size()
-             << std::endl;
-    DEBUGOUT << "superposition at origin: "
-             << superpositions.find(origin)->second->probability << std::endl;
+    //DEBUGOUT << "superpositions after move" << superpositions.size()<< std::endl;
+    //DEBUGOUT << "superposition at origin: "            << superpositions.find(origin)->second->probability << std::endl;
 }
 
 Piece::~Piece() {

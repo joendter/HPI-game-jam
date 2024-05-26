@@ -56,6 +56,7 @@ bool Game::validMove(Coordinate origin, Coordinate destination) const {
     return true;
 }
 void Game::move(Coordinate origin, Coordinate destination) {
+    std::mt19937 gen(dirtyrandom());
     // check if move is valid
     if (!validMove(origin, destination)) {
         return;
@@ -73,20 +74,17 @@ void Game::move(Coordinate origin, Coordinate destination) {
     }
     // if the square we want to move to is empty move to that square
     if (defender == nullptr || defender == piece) {
-        DEBUGOUT << "moved normally" << std::endl;
+         //DEBUGOUT<< "moved normally" << std::endl;
         piece->move(origin, destination, probability);
-        turn++;
-        return;
+        goto success;
     }
 
-    std::mt19937 gen(dirtyrandom());
 
     // collapse the attacker
     piece->collapse(gen);
     // check if the move is still valid with the collapsed attacker
     if (!validMove(origin, destination)) {
-        turn++;
-        return;
+        goto success;
     };
 
     defender->collapse(gen);
@@ -94,19 +92,22 @@ void Game::move(Coordinate origin, Coordinate destination) {
         players[(turn + 1 + defenderFriendly) % 2].findPiece(destination);
     if (defender == nullptr) {
         piece->move(origin, destination, Fraction(1));
-        turn++;
-        return;
+        goto success;
     }
     if (defenderFriendly) {
-        turn++;
-        return;
+        goto success;
     }
     if (!defenderFriendly) {
         players[(turn + 1) % 2].takePiece(defender);
         piece->move(origin, destination, Fraction(1));
-        turn++;
-        return;
+        goto success;
     }
+
+success:
+    prevOrigin = origin;
+    prevDestination = destination;
+    turn++;
+    return;
 }
 
 bool Game::isValid() const {
@@ -134,7 +135,10 @@ bool Game::isValid() const {
 
 RGBColor Game::getSquareColor(Coordinate location) const {
     bool even = (location.x + location.y) % 2;
-    return RGBColor(255, 128 * (1 - even), 128 * (1 - even));
+    bool touched =  ((location == prevOrigin) + (location == prevDestination));
+    return RGBColor(255 - 64*touched, 
+            128 * (1 - even) , 
+            128 * (1 - even));
 }
 
 Game::Game(std::string fen) {

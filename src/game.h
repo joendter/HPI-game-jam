@@ -15,6 +15,9 @@ class Game {
     Player players[2];
     unsigned int turn;
     Fraction probability = Fraction(1, 2);
+    Coordinate prevOrigin = Coordinate(-1,-1);
+    Coordinate prevDestination = Coordinate(-1,-1);
+
 
     Piece *onLocation(Coordinate location) const;
     void print() const;
