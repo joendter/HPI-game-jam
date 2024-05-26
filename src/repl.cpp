@@ -13,6 +13,9 @@ void repl(Game game) {
             std::cout << "invalid input" << std::endl;
         }
         game.move(getOrigin(input), getDestination(input));
+        if (game.winner() != -1) {
+            std::cout << "player " << game.winner() << " won" << std::endl;
+        }
     }
 }
 

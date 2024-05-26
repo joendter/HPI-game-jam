@@ -26,5 +26,6 @@ class Game {
     RGBColor getSquareColor(Coordinate location) const;
     Game(std::string fen = "8/8/8/8/8/8/8/8");
     bool raycastFree(Coordinate origin, Coordinate destination) const;
+    int winner()const;
 };
 #endif

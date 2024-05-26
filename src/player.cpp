@@ -45,3 +45,12 @@ void Player::spawnPiece(enum Piecetype type, Coordinate location) {
     piece->color = color;
     pieces.insert(piece);
 }
+
+bool Player::hasKing() const{
+    for (auto piece: pieces){
+        for (auto super : piece->superpositions){
+            if (super.second->type == KING) return true;
+        }
+    }
+    return false;
+}

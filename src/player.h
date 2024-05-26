@@ -15,5 +15,6 @@ class Player {
     bool piecesCorrect() const;
     unsigned numberPiecesOnSquare(Coordinate location) const;
     void spawnPiece(enum Piecetype type, Coordinate location);
+    bool hasKing() const;
 };
 #endif

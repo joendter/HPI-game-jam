@@ -177,3 +177,11 @@ bool Game::raycastFree(Coordinate origin, Coordinate destination) const {
     }
     return true;
 }
+
+int Game::winner()const{
+    if (!players[0].hasKing()) return 1;
+    if (!players[1].hasKing()) return 0;
+    return -1;
+
+   
+}
