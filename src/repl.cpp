@@ -38,7 +38,7 @@ bool checkInput(std::string input) {
         return false;
     }
 
-    if (input[1] < '1' || input[1] > '8') {
+    if (input[3] < '1' || input[1] > '8') {
         return false;
     }
 
