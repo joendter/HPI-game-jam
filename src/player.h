@@ -6,10 +6,14 @@
 #include <set>
 class Player {
   public:
-    enum Color white;
+    enum Color color;
     std::set<Piece *> pieces;
 
-    Piece *findPiece(Coordinate location) const ;
+    Piece *findPiece(Coordinate location) const;
     void takePiece(Piece *piece);
+    bool colorCorrect() const;
+    bool piecesCorrect() const;
+    unsigned numberPiecesOnSquare(Coordinate location) const;
+    void spawnPiece(enum Piecetype type, Coordinate location);
 };
 #endif

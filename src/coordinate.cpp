@@ -1,11 +1,21 @@
-#include <cmath>
 #include "coordinate.h"
-
-Coordinate::Coordinate(int nx , int ny ) : x(nx), y(ny){};
+#include <cmath>
+int sign(int x) {
+    if (x > 0) {
+        return 1;
+    } else if (x < 0) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+Coordinate::Coordinate(int nx, int ny) : x(nx), y(ny){};
 
 bool Coordinate::operator==(const Coordinate &other) const {
     return x == other.x && y == other.y;
 }
+
+bool Coordinate::operator!=(const Coordinate &other) const {return !(*this == other);} 
 
 bool Coordinate::operator<(const Coordinate &other) const {
     return x < other.x || (x == other.x && y < other.y);
@@ -40,4 +50,9 @@ Coordinate Coordinate::normalised() const {
     }
     return Coordinate(nx, ny);
 }
+
+Coordinate Coordinate::direction() const{
+    return Coordinate(sign(x), sign(y));
+}
+
 

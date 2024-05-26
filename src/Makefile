@@ -33,5 +33,3 @@ clean:
 mkdir:
 	mkdir -p ../out
 
-# Phony targets to avoid conflicts with files named 'all' or 'clean'
-.PHONY: all clean
