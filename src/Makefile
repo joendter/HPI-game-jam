@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17
 
 # Output executable name
-EXEC = main
+EXEC = ../out/main
 
 # Find all .cpp files in the current directory
 SOURCES = $(wildcard *.cpp)
@@ -14,7 +14,7 @@ SOURCES = $(wildcard *.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Default target to build the executable
-all: clean unclean 
+all: mkdir clean unclean 
 
 unclean: $(EXEC)
 
@@ -29,6 +29,9 @@ $(EXEC): $(OBJECTS)
 # Clean up build files
 clean:
 	rm -f $(OBJECTS) $(EXEC)
+
+mkdir:
+	mkdir -p ../out
 
 # Phony targets to avoid conflicts with files named 'all' or 'clean'
 .PHONY: all clean

@@ -1,3 +1,4 @@
 .obsidian/
 *.out
 *.o
+out/
