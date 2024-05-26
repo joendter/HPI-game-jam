@@ -1,6 +1,8 @@
 #include <cstdint>
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 int dirtyrandom() {
     // Open /dev/urandom and create input stream iterator
@@ -15,6 +17,10 @@ int dirtyrandom() {
     // urandom.close();
 
     // std::cout << "random value: " << randomValue << std::endl;
+        srand(static_cast<unsigned int>(time(0)));
 
-    return 42;
+    // Generate and print a random number
+    int random_number = rand();
+
+    return random_number;
 }
