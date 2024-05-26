@@ -7,7 +7,8 @@ Run
 cd src
 make
 ```
-The finished executable will be located in `/out/main`.
+The finished executable will be located in `/out/main`.  
+Run it in a terminal emulator that supports ANSI escape sequences for colors.  
 # Quantum-Chess: The Game
 Have you ever though chess was too deterministic? Too much skill involved? It's unfun because you always loose?  
 This version of chess tries to address this:  
