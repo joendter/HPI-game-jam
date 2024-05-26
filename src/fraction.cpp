@@ -107,5 +107,5 @@ char Fraction::asHex() const {
     if (floatint < 10) {
         return floatint + '0';
     }
-    return floatint + 'a' - 11;
+    return floatint + 'a' - 10;
 }
