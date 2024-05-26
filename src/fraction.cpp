@@ -100,11 +100,12 @@ void Fraction::reduce() {
     }
 }
 
-char Fraction::asHex() const{
-    char floatint = (char) (((float) *this)*16);
-    //DEBUGOUT <<std::endl << "floatint:" << std::to_string((int) floatint) << std::endl;
-    if (floatint < 10){
+char Fraction::asHex() const {
+    char floatint = (char)(((float)*this) * 16);
+    // DEBUGOUT <<std::endl << "floatint:" << std::to_string((int) floatint) <<
+    // std::endl;
+    if (floatint < 10) {
         return floatint + '0';
     }
-    return floatint + 'a'-11;
+    return floatint + 'a' - 11;
 }

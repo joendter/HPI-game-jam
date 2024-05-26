@@ -15,7 +15,9 @@ bool Coordinate::operator==(const Coordinate &other) const {
     return x == other.x && y == other.y;
 }
 
-bool Coordinate::operator!=(const Coordinate &other) const {return !(*this == other);} 
+bool Coordinate::operator!=(const Coordinate &other) const {
+    return !(*this == other);
+}
 
 bool Coordinate::operator<(const Coordinate &other) const {
     return x < other.x || (x == other.x && y < other.y);
@@ -51,8 +53,6 @@ Coordinate Coordinate::normalised() const {
     return Coordinate(nx, ny);
 }
 
-Coordinate Coordinate::direction() const{
+Coordinate Coordinate::direction() const {
     return Coordinate(sign(x), sign(y));
 }
-
-

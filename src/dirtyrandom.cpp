@@ -4,17 +4,17 @@
 
 int dirtyrandom() {
     // Open /dev/urandom and create input stream iterator
-//    std::ifstream urandom("/dev/urandom", std::ios::binary);
+    //    std::ifstream urandom("/dev/urandom", std::ios::binary);
 
     // Read 4 bytes and interpret as uint32_t
-  //  int randomValue;
+    //  int randomValue;
 
-    //urandom.read((char *)&randomValue, 4);
+    // urandom.read((char *)&randomValue, 4);
 
     // Close /dev/urandom
-    //urandom.close();
+    // urandom.close();
 
-    //std::cout << "random value: " << randomValue << std::endl;
+    // std::cout << "random value: " << randomValue << std::endl;
 
     return 42;
 }

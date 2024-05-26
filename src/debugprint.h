@@ -18,6 +18,6 @@ class NullStream : public std::ostream {
     }
 };
 
-#define DEBUGOUT Nullstream() 
+#define DEBUGOUT Nullstream()
 #endif
 #endif

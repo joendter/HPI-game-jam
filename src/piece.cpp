@@ -46,10 +46,7 @@ bool Piece::validMove(Coordinate origin, Coordinate destination) const {
     if (it == nullptr)
         return false;
     return validPieceMove(it->type,
-            color ? 
-            destination - origin :
-            origin - destination
-            );
+                          color ? destination - origin : origin - destination);
 }
 
 void Piece::collapse(std::mt19937 gen) {
@@ -61,9 +58,9 @@ void Piece::collapse(std::mt19937 gen) {
     }
 
     std::uniform_int_distribution<> dis(1, smallest_common_denominator);
-    //DEBUGOUT << "lcm: " << smallest_common_denominator << std::endl;
+    // DEBUGOUT << "lcm: " << smallest_common_denominator << std::endl;
     unsigned randomNumber = dis(gen);
-    //DEBUGOUT << "generated value" << randomNumber << std::endl;
+    // DEBUGOUT << "generated value" << randomNumber << std::endl;
     unsigned accumulator = 0;
     bool found = false;
     Coordinate collapsedPosition;
@@ -92,17 +89,19 @@ void Piece::move(Coordinate origin, Coordinate destination,
     auto other = onLocation(destination);
     if (other != nullptr) {
         other->probability = other->probability + yoinkedProbability;
-        //DEBUGOUT << "superpositions after move" << superpositions.size()<< std::endl;
+        // DEBUGOUT << "superpositions after move" << superpositions.size()<<
+        // std::endl;
         return;
     }
     enum Piecetype newSuperType = it->type;
-    if (it->type == PAWN && (destination.y == 0 + 7*color)){
+    if (it->type == PAWN && (destination.y == 0 + 7 * color)) {
         newSuperType = QUEEN;
     }
     superpositions[destination] =
         new Superposition(newSuperType, yoinkedProbability);
-    //DEBUGOUT << "superpositions after move" << superpositions.size()<< std::endl;
-    //DEBUGOUT << "superposition at origin: "            << superpositions.find(origin)->second->probability << std::endl;
+    // DEBUGOUT << "superpositions after move" << superpositions.size()<<
+    // std::endl; DEBUGOUT << "superposition at origin: "            <<
+    // superpositions.find(origin)->second->probability << std::endl;
 }
 
 Piece::~Piece() {
@@ -115,8 +114,7 @@ Piece::~Piece() {
 std::string Piece::stringAtPos(Coordinate position) const {
     auto it = superpositions.find(position)->second;
     return foregroundColor(
-        std::string() + (char)(it->type) + it->probability.asHex(),
-        getColor());
+        std::string() + (char)(it->type) + it->probability.asHex(), getColor());
 }
 
 bool Piece::isCorrect() const {

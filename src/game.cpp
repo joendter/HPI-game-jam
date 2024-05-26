@@ -49,8 +49,10 @@ bool Game::validMove(Coordinate origin, Coordinate destination) const {
         return false;
     }
     auto pieceType = piece->onLocation(origin)->type;
-    if (pieceType == ROOK || pieceType == BISHOP || pieceType == QUEEN){
-        if (!raycastFree(origin, destination)){return false;}
+    if (pieceType == ROOK || pieceType == BISHOP || pieceType == QUEEN) {
+        if (!raycastFree(origin, destination)) {
+            return false;
+        }
     }
 
     return true;
@@ -74,11 +76,10 @@ void Game::move(Coordinate origin, Coordinate destination) {
     }
     // if the square we want to move to is empty move to that square
     if (defender == nullptr || defender == piece) {
-         //DEBUGOUT<< "moved normally" << std::endl;
+        // DEBUGOUT<< "moved normally" << std::endl;
         piece->move(origin, destination, probability);
         goto success;
     }
-
 
     // collapse the attacker
     piece->collapse(gen);
@@ -135,10 +136,8 @@ bool Game::isValid() const {
 
 RGBColor Game::getSquareColor(Coordinate location) const {
     bool even = (location.x + location.y) % 2;
-    bool touched =  ((location == prevOrigin) + (location == prevDestination));
-    return RGBColor(255 - 64*touched, 
-            128 * (1 - even) , 
-            128 * (1 - even));
+    bool touched = ((location == prevOrigin) + (location == prevDestination));
+    return RGBColor(255 - 64 * touched, 128 * (1 - even), 128 * (1 - even));
 }
 
 Game::Game(std::string fen) {
@@ -160,19 +159,21 @@ Game::Game(std::string fen) {
         if ('a' <= c && c <= 'z')
             players[1].spawnPiece((enum Piecetype)c, Coordinate(x++, y));
         if ('A' <= c && c <= 'Z')
-            players[0].spawnPiece((enum Piecetype)(c - 'A' + 'a'), Coordinate(x++, y));
+            players[0].spawnPiece((enum Piecetype)(c - 'A' + 'a'),
+                                  Coordinate(x++, y));
         if (c == ' ')
             break;
     }
 }
 
-bool Game::raycastFree(Coordinate origin, Coordinate destination) const{
-    Piece* it = onLocation(origin);
-    Piece* other;
+bool Game::raycastFree(Coordinate origin, Coordinate destination) const {
+    Piece *it = onLocation(origin);
+    Piece *other;
     Coordinate direction = (destination - origin).direction();
-    for (Coordinate tmp = origin ; tmp != destination; tmp = tmp + direction){
+    for (Coordinate tmp = origin; tmp != destination; tmp = tmp + direction) {
         other = onLocation(tmp);
-        if (other != nullptr && other != it) return false;
+        if (other != nullptr && other != it)
+            return false;
     }
     return true;
 }

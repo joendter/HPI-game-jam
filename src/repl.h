@@ -1,11 +1,11 @@
 #ifndef REPL_H
 #define REPL_H
-#include "game.h"
-#include "debugprint.h"
 #include "ansicolor.h"
 #include "coordinate.h"
-#include <string>
+#include "debugprint.h"
+#include "game.h"
 #include <iostream>
+#include <string>
 void repl(Game game);
 bool checkInput(std::string input);
 Coordinate getOrigin(std::string input);
