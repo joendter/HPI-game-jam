@@ -1,5 +1,7 @@
 # HPI-game-jam
-18th HPI Game Jam: Architects of Disaster
+18th HPI Game Jam: Architects of Disaster.  
+Credits to [ChatGPT](https://chatgpt.com/share/ea195cec-ca03-48bd-abb5-0740f3a8628f).  
+
 # build-instructions
 To build this project you will need [cmake](https://cmake.org/) and a C++ compiler (ideally [g++](https://gcc.gnu.org/)).  
 Run
